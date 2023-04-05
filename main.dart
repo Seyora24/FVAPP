@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-// import './page/loginpage.dart';
-// import './page/registerpage.dart';
-import './page/registermitrapage.dart';
+import 'package:proyek_tiga/widgets/invoice.dart';
+import 'package:proyek_tiga/widgets/pemesanan.dart';
+import 'widgets/profil.dart';
 
-void main(List<String> args) {
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterMitra(),
+      home: InvoicePage(),
     );
   }
 }
-
