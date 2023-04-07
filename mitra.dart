@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fv_application/widgets/pemesanan.dart';
 import '../widgets/paket.dart';
+import 'profil.dart';
 
 class Mitra extends StatelessWidget {
   @override
@@ -109,18 +111,14 @@ class Tentang extends StatelessWidget {
 class Pemesanan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Search Page'),
-    );
+    return PemesananPage();
   }
 }
 
 class Profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Profile Page'),
-    );
+    return ProfilPage();
   }
 }
 

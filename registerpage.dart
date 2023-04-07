@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fv_application/widgets/mitra.dart';
+import 'package:fv_application/widgets/registermitrapage.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -201,7 +203,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(height: 20),
                     Container(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Mitra(),
+                              ));},
                         child: Text(
                           "DAFTAR",
                         ),
@@ -211,6 +215,23 @@ class _RegisterPageState extends State<RegisterPage> {
                               EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterMitra()));
+                          print('Text has been tapped!');
+                        },
+                        child: Text(
+                          'Daftar sebagai Mitra?',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.blue,
+                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -225,4 +246,3 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-

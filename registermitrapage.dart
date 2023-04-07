@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'mitra.dart';
+
 
 class RegisterMitra extends StatefulWidget {
   const RegisterMitra({super.key});
@@ -230,7 +232,9 @@ class _RegisterMitraState extends State<RegisterMitra> {
                     SizedBox(height: 20),
                     Container(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Mitra(),
+                              ));},
                         child: Text(
                           "DAFTAR",
                         ),
@@ -254,4 +258,3 @@ class _RegisterMitraState extends State<RegisterMitra> {
     );
   }
 }
-

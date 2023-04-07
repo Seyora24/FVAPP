@@ -1,26 +1,94 @@
 import 'package:flutter/material.dart';
 
-class Pemesanan extends StatefulWidget {
-  const Pemesanan({super.key});
+class PemesananPage extends StatelessWidget {
+  const PemesananPage({super.key});
 
   @override
-  State<Pemesanan> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: BottomNavigationWidget(),
+    );
+  }
 }
 
-class _HomePageState extends State<Pemesanan> {
-  late int index;
-  // List<String> data = [
-  //   "Pernikahan", "Hajatan", "Tunangan", "Siraman"
-  // ];
+class BottomNavigationWidget extends StatefulWidget {
+  @override
+  _BottomNavigationWidgetState createState() => _BottomNavigationWidgetState();
+}
 
-  List showWidget = [
-    Center(
-      child: Text("Beranda"),
-    ),
-    Center(
-      child: Text("Tentang"),
-    ),
-    Center(
+class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
+  int _currentIndex = 0;
+
+  final List<Widget> _children = [
+    Beranda(),
+    Tentang(),
+    Pemesanan(),
+    Profil(),
+  ];
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromARGB(255, 0, 128, 128),
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.white,
+        onTap: _onTabTapped,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Tentang',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Tentang',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Beranda extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Beranda'),
+    );
+  }
+}
+
+class Tentang extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('Tentang'),
+    );
+  }
+}
+
+class Pemesanan extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -174,8 +242,8 @@ class _HomePageState extends State<Pemesanan> {
                       child: Text("Pesan"),
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 0, 128, 128),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -188,42 +256,15 @@ class _HomePageState extends State<Pemesanan> {
           ],
         ),
       ),
-    ),
-    Center(
-      child: Text("Profil"),
-    ),
-  ];
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    index = 0;
-    super.initState();
+    );
   }
+}
 
+class Profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: showWidget[index],
-      bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 0, 128, 128),
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.amber,
-          unselectedItemColor: Colors.grey[50],
-          onTap: (value) {
-            setState(() {
-              index = value;
-            });
-          },
-          currentIndex: index,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
-            BottomNavigationBarItem(icon: Icon(Icons.info), label: "Tentang"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart), label: "Pemesanan"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_pin), label: "Profil"),
-          ]),
+    return Center(
+      child: Text('Profil'),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fv_aplication/page/registerpage.dart';
+import 'package:fv_application/widgets/mitra.dart';
+import 'package:fv_application/widgets/registerpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -115,7 +116,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 20),
                     Container(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Mitra(),
+                              ));},
                         child: Text(
                           "MASUK",
                         ),
@@ -156,4 +159,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
