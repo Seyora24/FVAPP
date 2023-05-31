@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fv_application/widgets/pemesanan.dart';
-import 'package:fv_application/widgets/profil.dart';
-import '../widgets/krisar.dart';
-import '../widgets/mitra.dart';
-
+import 'package:fv_aplication/page1/aplikasipage.dart';
+import 'package:fv_aplication/page1/formpemesananpage.dart';
 
 class Paket extends StatelessWidget {
   const Paket({super.key});
@@ -17,7 +14,7 @@ class Paket extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BottomNavigationWidget(),
-    );
+    ); 
   }
 }
 
@@ -30,56 +27,44 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    Beranda(),
-    Tentang(),
-    Pemesanan(),
-    Profil(),
+    PaketPage(),
   ];
 
   void _onTabTapped(int index) {
     setState(() {
-      _currentIndex = index;
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => FromPemesananPage(),
+      ));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('FV APP'),
-        leading: InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return Mitra();
-              }));
-            },
-            child: Icon(Icons.arrow_back)),
-        centerTitle: true,
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromARGB(255, 0, 128, 128),
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.amber,
         unselectedItemColor: Colors.white,
+        unselectedFontSize: 20,
+        iconSize: 1,
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold
+        ),
         onTap: _onTabTapped,
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
+            icon: SizedBox.shrink(),
+            label: ''
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Tentang',
+            icon: SizedBox.shrink(),
+            label: "PESAN"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Tentang',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: SizedBox.shrink(),
+            label: ''
           ),
         ],
       ),
@@ -87,135 +72,289 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   }
 }
 
-class Beranda extends StatelessWidget {
+class PaketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BuidChart(
-                  title: 'Paket 1', image: 'https://picsum.photos/200/300'),
-              BuidChart(
-                  title: 'Paket 2', image: 'https://picsum.photos/200/300')
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Tentang extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Tentang'),
-    );
-  }
-}
-
-class Pemesanan extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return PemesananPage();
-  }
-}
-
-class Profil extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProfilPage();
-  }
-}
-
-class BuidChart extends StatelessWidget {
-  String title;
-  String image;
-
-  BuidChart({Key? key, required this.title, required this.image})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
+    return SingleChildScrollView(
       child: Column(
         children: [
           Container(
-            width: 150,
-            height: 110,
+            width: 500,
+            height: 360,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              color: Colors.teal,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: Image.network(
-                image,
+              color: Colors.grey,
+              image: DecorationImage(
+                image: AssetImage("image/contoh.png"),
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            width: 150,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-              color: Colors.teal,
+            child: Padding(
+              padding: EdgeInsets.only(left: 5, top: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AplikasiPage(),
+                        ));
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                      )),
+                  SizedBox(height: 200),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Mitra 1",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Fotografer Pernikahan",
+                      style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 185,
+                  height: 185,
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  color: Colors.grey,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image:NetworkImage('https://picsum.photos/185/185')
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: Offset(1.0, 1.0),
+                    ),
+                    ],
+                  ),
+                ),
+                Row(
                   children: [
-                    Row(
+                    Column(
                       children: [
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Container(
+                          width: 87,
+                          height: 87,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.grey,
+                            image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:NetworkImage('https://picsum.photos/185/100')
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1.0, 1.0),
+                              ),
+                            ],
+                          ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 10),
+                          child: Container(
+                          width: 87,
+                          height: 87,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.grey,
+                            image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:NetworkImage('https://picsum.photos/100/185')
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1.0, 1.0),
+                              ),
+                            ],
+                          ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    Column(
                       children: [
-                        SizedBox(
-                          width: 65,
-                          height: 30,
-                          child: ElevatedButton(
-                            child: Text("Lihat"),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Krisar(),
-                              ));
-                            },
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Container(
+                          width: 87,
+                          height: 87,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.grey,
+                            image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:NetworkImage('https://picsum.photos/190/188')
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1.0, 1.0),
+                              ),
+                            ],
                           ),
-                        )
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, top: 10),
+                          child: Container(
+                          width: 87,
+                          height: 87,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Colors.grey,
+                            image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:NetworkImage('https://picsum.photos/195/150')
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(1.0, 1.0),
+                              ),
+                            ],
+                          ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            width: 500,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: Offset(0, 1),
+                )
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, top: 13),
+              child: Text("Daftar Paket",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+                ),
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 13),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Fotografer Pernikahan",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 13),
+            child: Row(
+              children: [
+                Text("Waktu yang tersedia",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                ),
+                SizedBox(width: 80),
+                Text("08:00 AM - 08:00 PM",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 13),
+            child: Row(
+              children: [
+                Text("Harga sesi per jam",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                ),
+                SizedBox(width: 140),
+                Text("IDR 1.000.000",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 13),
+            child: Row(
+              children: [
+                Text("harga harian / sesi 6 jam",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                ),
+                SizedBox(width: 95),
+                Text("IDR 4.000.000",
+                style: TextStyle(
+                  fontSize: 15
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 100)
         ],
       ),
     );
