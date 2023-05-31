@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fv_application/widgets/mitra.dart';
-import 'package:fv_application/widgets/registermitrapage.dart';
+import 'package:fv_aplication/page1/registermitrapage.dart';
+import 'package:intl/intl.dart';
+
 
 
 class RegisterPage extends StatefulWidget {
@@ -14,11 +15,12 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isHidden = true;
   TextEditingController emailC = TextEditingController();
   TextEditingController passC = TextEditingController();
+    DateTime selectDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[700],
+      backgroundColor: Color.fromARGB(255, 0, 128, 128),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -26,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               Container(
                 width: 350,
-                height: 700,
+                height: 750,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
@@ -172,42 +174,75 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    Container(
-                      padding: EdgeInsets.only(left: 30),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Tanggal Lahir",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Tanggal Lahir",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 5),
+                          ],
                         ),
                       ),
                     ),
                     SizedBox(height: 5),
                     Container(
-                      padding: EdgeInsets.only(left: 30, right: 30),
-                      child: Center(
-                        child: TextField(
-                          textInputAction: TextInputAction.done,
-                          autocorrect: false,
-                          keyboardType: TextInputType.datetime,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
+                      width: 290,
+                      height: 49,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey)
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                            ),
+                            child: Text(
+                              DateFormat.yMMMEd().format(selectDate),
+                              style: TextStyle(fontSize: 15),
                             ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 80),
+                            child: IconButton(
+                              onPressed: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: selectDate,
+                                  firstDate: selectDate.subtract(Duration(days: 30)),
+                                  lastDate: DateTime(selectDate.year + 1),
+                                  initialEntryMode: DatePickerEntryMode.input)
+                                  .then((value) {
+                                    if (value != null)
+                                    setState(() {
+                                      selectDate = value;
+                                  });
+                                  String formattedText = DateFormat('dd/MM/yyyy').format(selectDate);
+                                  print(formattedText);
+                                  });
+                              },
+                              icon: Icon(Icons.arrow_drop_down),
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 20),
                     Container(
                       child: ElevatedButton(
-                        onPressed: () {Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Mitra(),
-                              ));},
+                        onPressed: () {},
                         child: Text(
                           "DAFTAR",
+                          style: TextStyle(color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.orange[100],

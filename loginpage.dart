@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fv_application/widgets/mitra.dart';
-import 'package:fv_application/widgets/registerpage.dart';
+import 'package:fv_aplication/page1/aplikasipage.dart';
+import 'package:fv_aplication/page1/registerpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[700],
+      backgroundColor: Color.fromARGB(255, 0, 128, 128),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Container(
                 width: 350,
-                height: 530,
+                height: 550,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             contentPadding:
-                                EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -117,10 +117,11 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       child: ElevatedButton(
                         onPressed: () {Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Mitra(),
+                                builder: (context) => AplikasiPage(),
                               ));},
                         child: Text(
                           "MASUK",
+                          style: TextStyle(color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.orange[100],
@@ -141,6 +142,23 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: Text(
                           'Belum Punya akun?',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.blue,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AplikasiPage()));
+                          print('Text has been tapped!');
+                        },
+                        child: Text(
+                          'Lewati',
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: Colors.blue,
